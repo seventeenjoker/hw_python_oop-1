@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, astuple
 
 
 @dataclass
@@ -20,13 +20,7 @@ class InfoMessage:
 
     def get_message(self):
         """Возвращает строку сообщения."""
-        return self.MSG_CONST.format(
-            self.training_type,
-            self.duration,
-            self.distance,
-            self.speed,
-            self.calories
-        )
+        return self.MSG_CONST.format(*astuple(self))
 
 
 class Training:
@@ -145,7 +139,7 @@ def read_package(workout_type: str, data: list[int]) -> Training:
         'WLK': SportsWalking,
     }
     if not class_map.get(workout_type):
-        assert False, f'Неизвестная тренировка: {workout_type}'
+        return f'Неизвестная тренировка: {workout_type}'
     return class_map[workout_type](*data)
 
 
