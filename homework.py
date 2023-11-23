@@ -139,7 +139,7 @@ def read_package(workout_type: str, data: list[int]) -> Training:
         'WLK': SportsWalking,
     }
     if not class_map.get(workout_type):
-        raise f'Неизвестная тренировка: {workout_type}'
+        raise
     return class_map[workout_type](*data)
 
 
