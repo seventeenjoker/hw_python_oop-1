@@ -139,7 +139,7 @@ def read_package(workout_type: str, data: list[int]) -> Training:
         'WLK': SportsWalking,
     }
     if not class_map.get(workout_type):
-        raise
+        raise Exception(f"Неверное значение {workout_type}!")
     return class_map[workout_type](*data)
 
 
